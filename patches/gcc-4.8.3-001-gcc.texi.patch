@@ -1,0 +1,44 @@
+https://gcc.gnu.org/legacy-ml/gcc-patches/2013-09/msg02100.html
+
+[PATCH, doc]: Fix "@tex should only appear at a line beginning'" warnings
+
+    From: Uros Bizjak <ubizjak at gmail dot com>
+    To: "gcc-patches at gcc dot gnu dot org" <gcc-patches at gcc dot gnu dot org>
+    Date: Sun, 29 Sep 2013 22:55:39 +0200
+    Subject: [PATCH, doc]: Fix "@tex should only appear at a line beginning'" warnings
+    Authentication-results: sourceware.org; auth=none
+
+Hello!
+
+Attached patch decorates mail addresses with @mail{} to avoid "@tex
+should only appear at a line beginning'" warnings. Also the patch adds
+@uref and http:// prefix for a webpage.
+
+2013-09-29  Uros Bizjak  <ubizjak@gmail.com>
+
+    * doc/gcc.texi (titlepage): Use @uref and http:// prefix for website.
+    Use @email for email addresses.
+
+Tested with make doc on texinfo 5.1 Fedora 19.
+
+Uros.
+
+Index: gcc.texi
+===================================================================
+--- gcc.texi    (revision 203015)
++++ gcc.texi    (working copy)
+@@ -83,11 +83,11 @@
+ Published by:
+ @multitable @columnfractions 0.5 0.5
+ @item GNU Press
+-@tab Website: www.gnupress.org
++@tab Website: @uref{http://www.gnupress.org}
+ @item a division of the
+-@tab General: @tex press@@gnu.org @end tex
++@tab General: @email{press@@gnu.org}
+ @item Free Software Foundation
+-@tab Orders:  @tex sales@@gnu.org @end tex
++@tab Orders:  @email{sales@@gnu.org}
+ @item 51 Franklin Street, Fifth Floor
+ @tab Tel 617-542-5942
+ @item Boston, MA 02110-1301 USA
