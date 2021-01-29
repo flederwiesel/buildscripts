@@ -1,0 +1,28 @@
+diff --git a/tests/perf/CMakeLists.txt b/tests/perf/CMakeLists.txt
+index 053bfaae..58409871 100644
+--- a/tests/perf/CMakeLists.txt
++++ b/tests/perf/CMakeLists.txt
+@@ -33,6 +33,9 @@ target_link_libraries(fbperf test_util rfb ${FLTK_LIBRARIES} ${GETTEXT_LIBRARIES
+ if(WIN32)
+   target_link_libraries(fbperf msimg32)
+ endif()
++if(UNIX AND NOT APPLE)
++  target_link_libraries(fbperf "dl")
++endif()
+ if(APPLE)
+   target_link_libraries(fbperf "-framework Cocoa")
+   target_link_libraries(fbperf "-framework Carbon")
+--- a/vncviewer/CMakeLists.txt
++++ b/vncviewer/CMakeLists.txt
+@@ -53,7 +53,10 @@ target_link_libraries(vncviewer rfb network rdr os ${FLTK_LIBRARIES} ${GETTEXT_L
+ if(WIN32)
+   target_link_libraries(vncviewer msimg32)
+ endif()
+-
++if(UNIX)
++  target_link_libraries(vncviewer dl)
++  target_link_libraries(vncviewer png16)
++endif()
+ if(APPLE)
+   target_link_libraries(vncviewer "-framework Cocoa")
+   target_link_libraries(vncviewer "-framework Carbon")

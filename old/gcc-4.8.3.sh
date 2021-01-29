@@ -1,20 +1,20 @@
 #!/bin/bash
 
-set -e
+package=gcc
+version=4.8.3
 
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "$scriptdir")
 
 source "$scriptdir/config"
 
+set -e
+
 [ -f "$sysrootdir/$includedir/mpc.h" ] ||
 {
 	echo "mpc not found." >&2
 	exit 1
 }
-
-package=gcc
-version=4.8.3
 
 src_uri=http://ftpmirror.gnu.org/${package}/${package}-${version}/${package}-${version}.tar.bz2
 

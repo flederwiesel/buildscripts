@@ -1,0 +1,4 @@
+libedit -> openssh
+glib-2.0 -> gtk+
+atk -> gtk+
+pango - >gtk+

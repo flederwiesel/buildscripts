@@ -1,0 +1,2 @@
+#!/bin/sh
+apt install cmake git pkg-config xsltproc

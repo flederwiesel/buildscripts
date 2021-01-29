@@ -7,9 +7,9 @@ scriptdir=$(realpath "$scriptdir")
 
 source "$scriptdir/config"
 
-[ -f "$sysrootdir/$includedir/mpfr.h" ] ||
+[ -f "$sysrootdir/$includedir/gmp.h" ] ||
 {
-	echo "mpfr not found." >&2
+	echo "gmp not found." >&2
 	exit 1
 }
 

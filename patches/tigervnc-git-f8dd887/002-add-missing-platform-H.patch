@@ -1,0 +1,24 @@
+diff --git a/tests/perf/fbperf.cxx b/tests/perf/fbperf.cxx
+index a19ee479..c3bd3ae0 100644
+--- a/tests/perf/fbperf.cxx
++++ b/tests/perf/fbperf.cxx
+@@ -20,6 +20,7 @@
+ #include <sys/time.h>
+ 
+ #include <FL/Fl.H>
++#include <FL/platform.H>
+ #include <FL/Fl_Window.H>
+ #include <FL/fl_draw.H>
+ 
+diff --git a/vncviewer/Viewport.cxx b/vncviewer/Viewport.cxx
+index cd613279..8b63fc49 100644
+--- a/vncviewer/Viewport.cxx
++++ b/vncviewer/Viewport.cxx
+@@ -68,6 +68,7 @@
+ 
+ #include "PlatformPixelBuffer.h"
+ 
++#include <FL/platform.H>
+ #include <FL/fl_draw.H>
+ #include <FL/fl_ask.H>
+ 

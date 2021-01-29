@@ -1,0 +1,89 @@
+#!/bin/bash
+
+cd $(dirname "$0")
+
+find -maxdepth 1 -type f -name '*.sh' |
+grep -vFf <(cat <<"EOF"
+# /usr/bin/grep: /usr/lib/libX11.la: No such file or directory
+# /usr/bin/sed: can't read /usr/lib/libX11.la: No such file or directory
+libXi-1.6.1.sh
+# needs libXi
+libXtst-1.2.1.sh
+# needs libXtst
+tigervnc-git.sh
+EOF
+) |
+xargs awk '
+#!/usr/bin/awk -f
+
+function dep(package, depends)
+{
+	print gensub(/[.-]/, "_", "g", package) "() {"
+
+	print "\tlocal depends=" gensub(/[.-]/, "_", "g", depends)
+	print "\tfor d in ${depends[@]}"
+	print "\tdo"
+	print "\t\t[[ \"${made[@]}\" =~ \"${d}\" ]] || $d"
+	print "\tdone"
+
+	print "\tif ! [[ \"${made[@]}\" =~ \"" package "\" ]]; then"
+	print "\t\t" ARGV[file]
+	print "\t\tmade+=(" package ")"
+	print "\tfi"
+
+	print "}\n"
+}
+
+BEGIN {
+
+	line = 0
+	file = 1
+	depends = ""
+	delete packages[0]
+
+	print "#!/bin/bash\n"
+	print "made=()\n"
+	print "set -e\n"
+}
+
+{ ++line }
+
+FNR < line {
+
+	p = gensub(/[.-]/, "_", "g", package "-" version)
+	packages[length(packages)] = p
+	dep(p, depends)
+
+	file++
+	line = FNR
+	depends = ""
+}
+
+END {
+	p = gensub(/[.-]/, "_", "g", package "-" version)
+	packages[length(packages)] = p
+	dep(p, depends)
+
+	for (p in packages)
+		print packages[p]
+}
+
+/^package=/ {
+	package = gensub(/.*=/, "", "g")
+}
+
+/^version=/ {
+	version = gensub(/.*=/, "", "g")
+}
+
+/^depends=\(/ {
+	depends = gensub(/.*=(.*)/, "\\1", "g")
+}
+
+/^depends=[^(]/ {
+	print "\033[1;31m" ARGV[file] "(" line "): " $0 "\033[m" > "/dev/stderr"
+	exit(1)
+}
+' > make-all
+
+chmod +x make-all

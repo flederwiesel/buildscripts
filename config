@@ -1,0 +1,46 @@
+#!/bin/sh
+
+if ! [ -d "${scriptdir}" ]; then
+	echo "\${scriptdir} not found or not a directory!" >&2
+	exit 1
+fi
+
+path=$(realpath "${scriptdir}")
+
+if [ "${path}" != "${scriptdir}" ]; then
+	echo "\${scriptdir} must be absolute!" >&2
+	exit 1
+fi
+
+if [ -z "${package}" ]; then
+	echo "\${package} must be set!" >&2
+	exit 1
+fi
+
+if [ -z "${version}" ]; then
+	echo "\${version} must be set!" >&2
+	exit 1
+fi
+
+if [ -d "${scriptdir}" ]; then
+	export downloaddir="${scriptdir}/download"
+	export tmpdir="${HOME}/tmp"
+	export workdir="${tmpdir}/work/${package}-${version}"
+	export srcdir="${workdir}/src"
+	export sysrootdir="${workdir}/sysroot"
+	export builddir="${workdir}/build"
+	export imagedir="${workdir}/image"
+	export sysrootsdir="${tmpdir}/sysroots/${package}-${version}" # must be capable of hardlinking...
+	export deploydir="${scriptdir}/deploy"
+	export packagesdir="${deploydir}/packages"
+
+	export prefix=/usr
+	export bindir="${prefix}/bin"
+	export libdir="${prefix}/lib"
+	export includedir="${prefix}/include"
+	export sysconfdir=/etc
+	export datadir="${prefix}/share"
+	export datarootdir="${datadir}"
+	export baselibdir=/lib
+	export baselibdir_mutiarch=/lib$([[ x86_64 == $(uname -m) ]] && echo 64)
+fi
