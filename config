@@ -24,7 +24,7 @@ fi
 
 if [ -d "${scriptdir}" ]; then
 	export downloaddir="${scriptdir}/download"
-	export tmpdir="${HOME}/tmp"
+	export tmpdir="${TMPDIR:-${HOME}/tmp}"
 	export workdir="${tmpdir}/work/${package}-${version}"
 	export srcdir="${workdir}/src"
 	export sysrootdir="${workdir}/sysroot"
