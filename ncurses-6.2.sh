@@ -44,4 +44,4 @@ make -j 8
 make install DESTDIR="${imagedir}"
 
 tar cJf "${packagesdir}/${package}-${version}.tar.xz" -C "${imagedir}" .
-tar xJf "${packagesdir}/${package}-${version}.tar.xz" -C "${sysrootsdir}"
+tar xJf "${packagesdir}/${package}-${version}.tar.xz" -C "${sysrootsdir}" --overwrite

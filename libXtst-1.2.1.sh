@@ -23,7 +23,7 @@ tar xf "${downloaddir}/${package}-${version}.tar.bz2" -C "${srcdir}" --strip-com
 
 for dep in "${depends[@]}"
 do
-	cp -rl "${sysrootsdir}/../${dep}/"* "${sysrootdir}"
+	cp -rlf "${sysrootsdir}/../${dep}/"* "${sysrootdir}"
 done
 
 cd "$builddir"
@@ -40,4 +40,4 @@ make -j 8
 make install DESTDIR="${imagedir}"
 
 tar cJf "${packagesdir}/${package}-${version}.tar.xz" -C "${imagedir}" .
-tar xJf "${packagesdir}/${package}-${version}.tar.xz" -C "${sysrootsdir}"
+tar xJf "${packagesdir}/${package}-${version}.tar.xz" -C "${sysrootsdir}" --overwrite
