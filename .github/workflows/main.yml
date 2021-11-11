@@ -20,7 +20,7 @@ jobs:
 
     steps:
       - name: apt
-        run: sudo apt install cmake git pkg-config xsltproc
+        run: sudo apt install cmake lzip pkg-config xsltproc
 
   build:
     # The type of runner that the job will run on
