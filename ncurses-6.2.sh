@@ -38,7 +38,7 @@ cd "$builddir"
 	--with-abi-version=5 \
 	--with-shared \
 	--without-ada --without-cxx --without-cxx-binding \
-	--without-manpages --without-progs --without-tests --without-develop \
+	--without-manpages --without-tests --without-develop \
 
 make -j 8
 make install DESTDIR="${imagedir}"
