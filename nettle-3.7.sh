@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=nettle
 version=3.7
-depends=(gmp-6.2.1 openssl-1.1.1i)
+depends=(gmp-6.2.1 openssl-1.1.1l)
 
 source "${scriptdir}/config"
 

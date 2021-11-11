@@ -5,13 +5,13 @@ set -e
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
-package=openssh
-version=8.4p1
-depends=(Linux-PAM-1.5.1 openssl-1.1.1i zlib-1.2.11)
+package=openssl
+version=1.1.1l
+depends=(zlib-1.2.11)
 
 source "${scriptdir}/config"
 
-src_uri=https://ftp.hostserver.de/pub/OpenBSD/OpenSSH/portable/${package}-${version}.tar.gz
+src_uri=https://www.openssl.org/source/${package}-${version}.tar.gz
 
 rm -rf "${sysrootsdir}"
 mkdir -p "${downloaddir}" "${srcdir}" "${sysrootdir}" "${builddir}" "${packagesdir}" "${sysrootsdir}"
@@ -29,14 +29,16 @@ done
 cd "$builddir"
 
 CPPFLAGS="-I${sysrootdir}${includedir}" \
-LDFLAGS="-L${sysrootdir}${libdir} -Wl,--sysroot=${sysrootdir}" \
-"${srcdir}/configure" \
+LDFLAGS="-L${sysrootdir}${libdir}" \
+"${srcdir}/Configure" \
 	--prefix="${prefix}" \
-	--without-openssl-header-check \
-	--with-pam \
+	--libdir="${libdir}" \
+	--openssldir="${datadir}/openssl" \
+	shared threads zlib-dynamic \
+	linux-x86_64
 
 make -j 8
-make install-nokeys DESTDIR="${imagedir}"
+make install DESTDIR="${imagedir}"
 
 tar cJf "${packagesdir}/${package}-${version}.tar.xz" -C "${imagedir}" .
 tar xJf "${packagesdir}/${package}-${version}.tar.xz" -C "${sysrootsdir}" --overwrite

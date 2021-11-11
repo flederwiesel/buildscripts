@@ -5,21 +5,21 @@ set -e
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
-package=Linux-PAM
-version=1.5.1
+package=libjpeg-turbo
+version=2.1.1
 depends=()
 
 source "${scriptdir}/config"
 
-src_uri=https://github.com/linux-pam/linux-pam/releases/download/v${version}/${package}-${version}.tar.xz
+src_uri=https://nav.dl.sourceforge.net/project/libjpeg-turbo/${version}/${package}-${version}.tar.gz
 
 rm -rf "${sysrootsdir}"
 mkdir -p "${downloaddir}" "${srcdir}" "${sysrootdir}" "${builddir}" "${packagesdir}" "${sysrootsdir}"
 
-[ -f "${downloaddir}/${package}-${version}.tar.xz" ] ||
+[ -f "${downloaddir}/${package}-${version}.tar.gz" ] ||
 	wget -P "${downloaddir}" "${src_uri}"
 
-tar xf "${downloaddir}/${package}-${version}.tar.xz" -C "${srcdir}" --strip-components=1
+tar xf "${downloaddir}/${package}-${version}.tar.gz" -C "${srcdir}" --strip-components=1
 
 for dep in "${depends[@]}"
 do
@@ -28,12 +28,10 @@ done
 
 cd "$builddir"
 
-"${srcdir}/configure" \
-	--prefix="${prefix}" \
-	--libdir="${libdir}" \
-	--enable-fast-install \
-	--disable-dependency-tracking \
-	--enable-shared
+cmake "${srcdir}" \
+	-DCMAKE_VERBOSE_MAKEFILE=1 \
+	-DCMAKE_INSTALL_PREFIX="${prefix}" \
+	-DCMAKE_FIND_ROOT_PATH="${sysrootdir}" \
 
 make -j 8
 make install DESTDIR="${imagedir}"

@@ -5,21 +5,21 @@ set -e
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
-package=openssl
-version=1.1.1i
-depends=(zlib-1.2.11)
+package=Linux-PAM
+version=1.5.2
+depends=()
 
 source "${scriptdir}/config"
 
-src_uri=https://www.openssl.org/source/${package}-${version}.tar.gz
+src_uri=https://github.com/linux-pam/linux-pam/releases/download/v${version}/${package}-${version}.tar.xz
 
 rm -rf "${sysrootsdir}"
 mkdir -p "${downloaddir}" "${srcdir}" "${sysrootdir}" "${builddir}" "${packagesdir}" "${sysrootsdir}"
 
-[ -f "${downloaddir}/${package}-${version}.tar.gz" ] ||
+[ -f "${downloaddir}/${package}-${version}.tar.xz" ] ||
 	wget -P "${downloaddir}" "${src_uri}"
 
-tar xf "${downloaddir}/${package}-${version}.tar.gz" -C "${srcdir}" --strip-components=1
+tar xf "${downloaddir}/${package}-${version}.tar.xz" -C "${srcdir}" --strip-components=1
 
 for dep in "${depends[@]}"
 do
@@ -28,14 +28,12 @@ done
 
 cd "$builddir"
 
-CPPFLAGS="-I${sysrootdir}${includedir}" \
-LDFLAGS="-L${sysrootdir}${libdir}" \
-"${srcdir}/Configure" \
+"${srcdir}/configure" \
 	--prefix="${prefix}" \
 	--libdir="${libdir}" \
-	--openssldir="${datadir}/openssl" \
-	shared threads zlib-dynamic \
-	linux-x86_64
+	--enable-fast-install \
+	--disable-dependency-tracking \
+	--enable-shared
 
 make -j 8
 make install DESTDIR="${imagedir}"

@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=LibVNCServer
 version=0.9.13
-depends=(openssl-1.1.1i)
+depends=(openssl-1.1.1l)
 
 source "${scriptdir}/config"
 

@@ -8,7 +8,7 @@ scriptdir=$(realpath "${scriptdir}")
 package=tigervnc
 version=6bc7ae9
 #pixman-0.40.0
-depends=(fltk-871e706 gettext-0.21 gmp-6.2.1 gnutls-3.6.15 kbproto-1.0.6 libjpeg-turbo-2.0.6 libpng-1.6.37 libX11-1.5.0 libxcb-1.11.1 libXtst-1.2.1 Linux-PAM-1.5.1 nettle-3.7 xextproto-7.2.1 xproto-7.0.23 zlib-1.2.11)
+depends=(fltk-871e706 gettext-0.21 gmp-6.2.1 gnutls-3.7.2 kbproto-1.0.6 libjpeg-turbo-2.1.1 libpng-1.6.37 libX11-1.5.0 libxcb-1.11.1 libXtst-1.2.1 Linux-PAM-1.5.2 nettle-3.7 xextproto-7.2.1 xproto-7.0.23 zlib-1.2.11)
 
 source "${scriptdir}/config"
 

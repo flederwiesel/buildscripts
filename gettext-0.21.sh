@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=gettext
 version=0.21
-depends=(libiconv-1.16 ncurses-6.2)
+depends=(libiconv-1.16 ncurses-6.3)
 
 source "${scriptdir}/config"
 

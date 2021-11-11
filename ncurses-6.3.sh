@@ -5,13 +5,13 @@ set -e
 scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
-package=libjpeg-turbo
-version=2.0.6
-depends=()
+package=ncurses
+version=6.3
+depends=(termcap-1.3.1)
 
 source "${scriptdir}/config"
 
-src_uri=https://nav.dl.sourceforge.net/project/libjpeg-turbo/${version}/${package}-${version}.tar.gz
+src_uri=ftp://ftp.gnu.org/gnu/ncurses/${package}-${version}.tar.gz
 
 rm -rf "${sysrootsdir}"
 mkdir -p "${downloaddir}" "${srcdir}" "${sysrootdir}" "${builddir}" "${packagesdir}" "${sysrootsdir}"
@@ -28,10 +28,17 @@ done
 
 cd "$builddir"
 
-cmake "${srcdir}" \
-	-DCMAKE_VERBOSE_MAKEFILE=1 \
-	-DCMAKE_INSTALL_PREFIX="${prefix}" \
-	-DCMAKE_FIND_ROOT_PATH="${sysrootdir}" \
+"${srcdir}/configure" \
+	--prefix="${prefix}" \
+	--datadir="${datadir}" \
+	--enable-rpath \
+	--enable-ext-colors \
+	--enable-termcap \
+	--enable-pc-files \
+	--with-abi-version=5 \
+	--with-shared \
+	--without-ada --without-cxx --without-cxx-binding \
+	--without-manpages --without-tests --without-develop \
 
 make -j 8
 make install DESTDIR="${imagedir}"

@@ -6,7 +6,7 @@ scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
 package=gnutls
-version=3.6.15
+version=3.7.2
 depends=(gmp-6.2.1 libunistring-0.9.10 nettle-3.7)
 
 source "${scriptdir}/config"

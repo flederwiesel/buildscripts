@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=fltk
 version=871e706
-depends=(kbproto-1.0.6 libjpeg-turbo-2.0.6 libpng-1.6.37 libX11-1.5.0 libxcb-1.11.1 xproto-7.0.23 zlib-1.2.11 libXext-1.3.1 libXrender-0.9.7 libXfixes-5.0 libXinerama-1.1.2)
+depends=(kbproto-1.0.6 libjpeg-turbo-2.1.1 libpng-1.6.37 libX11-1.5.0 libxcb-1.11.1 xproto-7.0.23 zlib-1.2.11 libXext-1.3.1 libXrender-0.9.7 libXfixes-5.0 libXinerama-1.1.2)
 
 source "${scriptdir}/config"
 
