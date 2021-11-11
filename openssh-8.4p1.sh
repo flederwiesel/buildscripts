@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=openssh
 version=8.4p1
-depends=(glibc-2.32 Linux-PAM-1.5.1 openssl-1.1.1i zlib-1.2.11)
+depends=(Linux-PAM-1.5.1 openssl-1.1.1i zlib-1.2.11)
 
 source "${scriptdir}/config"
 
