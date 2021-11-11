@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=libX11
 version=1.5.0
-depends=(inputproto-2.2 kbproto-1.0.6 libpthread-stubs-0.4 libXau-1.0.7 libxcb-1.8.1 xextproto-7.2.1 xproto-7.0.23 xtrans-1.2.7)
+depends=(inputproto-2.2 kbproto-1.0.6 libpthread-stubs-0.4 libXau-1.0.7 libxcb-1.11.1 xextproto-7.2.1 xproto-7.0.23 xtrans-1.2.7)
 
 source "${scriptdir}/config"
 

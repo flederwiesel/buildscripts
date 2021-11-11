@@ -6,12 +6,12 @@ scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
 package=xcb-proto
-version=1.7.1
+version=1.11
 depends=()
 
 source "${scriptdir}/config"
 
-src_uri=https://www.x.org/releases/X11R7.7/src/xcb/${package}-${version}.tar.bz2
+src_uri=https://xcb.freedesktop.org/dist/${package}-${version}.tar.bz2
 
 mkdir -p "${downloaddir}" "${srcdir}" "${sysrootdir}" "${builddir}" "${packagesdir}" "${sysrootsdir}"
 

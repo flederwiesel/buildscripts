@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=libXtst
 version=1.2.1
-depends=(libX11-1.5.0 xextproto-7.2.1 inputproto-2.2 xproto-7.0.23 kbproto-1.0.6 libxcb-1.8.1 libpthread-stubs-0.4 libXau-1.0.7 libXext-1.3.1)
+depends=(libX11-1.5.0 xextproto-7.2.1 inputproto-2.2 xproto-7.0.23 kbproto-1.0.6 libxcb-1.11.1 libpthread-stubs-0.4 libXau-1.0.7 libXext-1.3.1)
 
 source "${scriptdir}/config"
 

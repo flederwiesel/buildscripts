@@ -7,7 +7,7 @@ scriptdir=$(realpath "${scriptdir}")
 
 package=libXi
 version=1.6.1
-depends=(xproto-7.0.23 libX11-1.5.0 xextproto-7.2.1 libXext-1.3.1 inputproto-2.2 kbproto-1.0.6 libxcb-1.8.1 libXau-1.0.7 libpthread-stubs-0.4)
+depends=(xproto-7.0.23 libX11-1.5.0 xextproto-7.2.1 libXext-1.3.1 inputproto-2.2 kbproto-1.0.6 libxcb-1.11.1 libXau-1.0.7 libpthread-stubs-0.4)
 
 source "${scriptdir}/config"
 

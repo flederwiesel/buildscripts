@@ -6,12 +6,12 @@ scriptdir=$(dirname "${BASH_SOURCE[0]}")
 scriptdir=$(realpath "${scriptdir}")
 
 package=libxcb
-version=1.8.1
-depends=(libpthread-stubs-0.4 libXau-1.0.7 xcb-proto-1.7.1 xproto-7.0.23)
+version=1.11.1
+depends=(libpthread-stubs-0.4 libXau-1.0.7 xcb-proto-1.11 xproto-7.0.23)
 
 source "${scriptdir}/config"
 
-src_uri=https://www.x.org/releases/X11R7.7/src/xcb/${package}-${version}.tar.bz2
+src_uri=https://xcb.freedesktop.org/dist/${package}-${version}.tar.bz2
 
 rm -rf "${sysrootsdir}"
 mkdir -p "${downloaddir}" "${srcdir}" "${sysrootdir}" "${builddir}" "${packagesdir}" "${sysrootsdir}"
